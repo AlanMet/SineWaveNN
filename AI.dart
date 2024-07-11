@@ -18,14 +18,10 @@ List<List<Matrix>> generateData(int amount) {
   return [labels, inputs];
 }
 
-void getAccuracy(List<List<Matrix>> data, Network net) {
+void getAccuracy(Network net) {
   List<List<Matrix>> data = generateData(10000);
   int total = 0;
   for (var i = 0; i < data[0].length; i++) {
-    /*print("Prediction:");
-    print(net.predict(data[1][i]).getAt(0, 0));
-    print("True:");
-    print(data[0][i].getAt(0, 0));*/
     if (net.predict(data[1][i]).getAt(0, 0).toStringAsFixed(2) ==
         data[0][i].getAt(0, 0).toStringAsFixed(2)) {
       total += 1;
@@ -39,5 +35,5 @@ void main() {
   List<List<Matrix>> data = generateData(10000);
 
   net.train(data[1], data[0], 0.001, 10000);
-  getAccuracy(data, net);
+  getAccuracy(net);
 }
